@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as io;
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -40,7 +40,7 @@ class PDF extends StatefulWidget {
   /// file : [File] object that represents the PDF file from device.
   /// placeholder : [Widget] to show when pdf is loading from network.
   factory PDF.file(
-    File file, {
+    io.File file, {
     double width = double.maxFinite,
     double height = double.maxFinite,
     Widget? placeHolder,
@@ -70,7 +70,7 @@ class PDF extends StatefulWidget {
   }
 
   final String? networkURL;
-  final File? file;
+  final io.File? file;
   final String? assetsPath;
   final double height;
   final double width;
@@ -83,10 +83,10 @@ class PDF extends StatefulWidget {
 class _PDFState extends State<PDF> {
   String? path;
 
-  Future<File> get _localFile async {
+  Future<io.File> get _localFile async {
     final path = (await getApplicationDocumentsDirectory()).path;
     final fileName = getFileName();
-    return File('$path/$fileName.pdf');
+    return io.File('$path/$fileName.pdf');
   }
 
   String getFileName() {
@@ -106,7 +106,7 @@ class _PDFState extends State<PDF> {
     return result;
   }
 
-  Future<File> writeCounter(Uint8List stream) async =>
+  Future<io.File> writeCounter(Uint8List stream) async =>
       (await _localFile).writeAsBytes(stream);
 
   Future<bool> existsFile() async => (await _localFile).exists();
