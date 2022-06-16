@@ -10,4 +10,17 @@ public class PdfFlutterPlugin implements FlutterPlugin {
             .registerViewFactory(
                     "pdf_flutter_plugin", new PdfFlutterFactory(registrar.messenger()));
   }
+  
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    binding
+            .getPlatformViewRegistry()
+            .registerViewFactory(
+                    "pdf_flutter_plugin", new PdfFlutterFactory(binding.getBinaryMessenger()));
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+
+  }
 }
